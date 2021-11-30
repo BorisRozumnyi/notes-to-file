@@ -1,35 +1,19 @@
-const fs = require('fs');
-const path = require('path');
+const express = require('express');
+const { dataRouter } = require('./dataRouter');
+const PORT = process.env.PORT || 5000;
+const app = express();
 
-const text = 'some content';
-const notexDir = path.join(__dirname, '../notes');
+app.use(express.json());
+app.use('/data', dataRouter);
 
-const createDirectoryAsync = async (path) =>
-  new Promise((resolve, reject) =>
-    fs.mkdir(path, (err, data) => {
-      if (err) reject(err.message);
-      resolve(data);
-    })
-  );
+const start = () => {
+  try {
+    app.listen(PORT, () => {
+      console.log(`Server started at http://localhost:${PORT}`);
+    });
+  } catch (e) {
+    console.log(e);
+  }
+};
 
-const writeFileAsync = async (path, data) =>
-  new Promise((resolve, reject) =>
-    fs.writeFile(path, data, (err) => {
-      if (err) reject(err.message);
-      resolve();
-    })
-  );
-
-// console.log(path.resolve(__dirname, '..'));
-// if (fs.existsSync(notexDir)) {
-//   console.log('Directory exists!');
-// } else {
-//   console.log('Directory not found.');
-// }
-
-// if (!fs.existsSync(notexDir))
-//   createDirectoryAsync(path.join(notexDir))
-//     .then(() => writeFileAsync(notexDir, 'text.txt'))
-//     .catch((err) => console.log(err));
-
-writeFileAsync(path.resolve(__dirname), 'text.txt');
+start();
