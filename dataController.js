@@ -1,5 +1,11 @@
 const path = require('path');
-const { writeFileAsync, appendFileAsync, readFileAsync, isFileExists } = require('./helpers');
+const {
+  writeFileAsync,
+  appendFileAsync,
+  readFileAsync,
+  isFileExists,
+  showList,
+} = require('./helpers');
 const recordingDirectory = `${__dirname}/notes`;
 
 class dataController {
@@ -42,10 +48,8 @@ class dataController {
   }
 
   async getData(req, res) {
-    const data = { data: 'some data' };
     try {
-      console.log('getData: ');
-      res.json(data);
+      showList(path.resolve(recordingDirectory)).then((result) => res.json(result));
     } catch (e) {
       console.log(e);
     }
