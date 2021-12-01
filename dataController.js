@@ -1,3 +1,7 @@
+const path = require('path');
+const { writeFileAsync, appendFileAsync, readFileAsync, isFileExists } = require('./helpers');
+const recordingDirectory = `${__dirname}/notes`;
+
 class dataController {
   async postData(req, res) {
     try {
@@ -10,8 +14,24 @@ class dataController {
           },
         });
       }
-      return res.json({
-        success: 'Данные успешно переданы',
+
+      isFileExists(recordingDirectory, fileName).then((result) => {
+        if (result) {
+          appendFileAsync(path.resolve(recordingDirectory, result), text);
+
+          return res.json({
+            success: `Файл ${fileName}.txt успешно обновлен`,
+          });
+        } else {
+          writeFileAsync(path.resolve(recordingDirectory, `${fileName}.txt`), text)
+            .then(() => readFileAsync(path.resolve(recordingDirectory, `${fileName}.txt`)))
+            .then((data) => console.log(data))
+            .catch((err) => console.log(err));
+
+          return res.json({
+            success: `Файл ${fileName}.txt успешно создан`,
+          });
+        }
       });
     } catch (e) {
       console.log(e);

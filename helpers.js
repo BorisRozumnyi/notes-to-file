@@ -32,4 +32,12 @@ const removeFileAsync = async (path) =>
     })
   );
 
-module.exports = { writeFileAsync, appendFileAsync, readFileAsync, removeFileAsync };
+const isFileExists = async (path, fileName) =>
+  new Promise((resolve, reject) =>
+    fs.readdir(path, (err, files) => {
+      if (err) reject(err.message);
+      resolve(files.find((file) => file === `${fileName}.txt`));
+    })
+  );
+
+module.exports = { writeFileAsync, appendFileAsync, readFileAsync, removeFileAsync, isFileExists };
