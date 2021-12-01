@@ -1,41 +1,28 @@
 import { api } from '../../urls';
 
-export const postRegistration = (
-  dispatch,
-  data
-) => {
+export const postData = (dispatch, data) => {
   const config = {
     method: 'POST',
     headers: {
-      'Content-Type':
-        'application/json',
-      'Access-Control-Allow-Origin':
-        '*',
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*',
     },
     body: JSON.stringify(data),
   };
 
   dispatch({
-    type: 'POST_REGISTRATION_REQUEST',
+    type: 'POST_DATA_REQUEST',
   });
 
-  fetch(api.registration, config)
+  fetch(api.write, config)
     .then((res) => res.json())
     .then(
       (result) => {
-        if (
-          result.message ===
-            'Пользователь с таким именем уже существует' ||
-          result.message ===
-            'Ошибка при регистрации'
-        ) {
+        if (result.error) {
           throw result;
         }
 
-        if (
-          result.message ===
-          'Пользователь успешно зарегистрирован'
-        ) {
+        if (result.success) {
           dispatch({
             type: 'POST_REGISTRATION_SUCCESS',
             payload: result,
@@ -50,12 +37,12 @@ export const postRegistration = (
       // Примечание: важно обрабатывать ошибки именно здесь, а не в блоке catch(),
       // чтобы не перехватывать исключения из ошибок в самих компонентах.
       (error) => {
-        console.log(error);
+        console.log('error', error);
       }
     )
     .catch((error) => {
       dispatch({
-        type: 'POST_REGISTRATION_ERROR',
+        type: 'POST_DATA_ERROR',
         payload: error,
       });
       dispatch({

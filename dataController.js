@@ -4,7 +4,10 @@ class dataController {
       const { fileName, text } = req.body;
       if (!fileName || text === undefined) {
         return res.status(400).json({
-          message: [`fileName отсутствует или не заполнен`, `text отсутствует`],
+          error: {
+            message: 'Не хватает данных',
+            fields: [`fileName отсутствует или не заполнен`, `text отсутствует`],
+          },
         });
       }
       return res.json({

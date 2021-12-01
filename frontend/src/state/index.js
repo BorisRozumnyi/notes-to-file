@@ -1,13 +1,13 @@
 import React, { createContext, useReducer } from 'react';
 import {
-  registrationReducer,
-  registrationInitialState,
+  dataReducer,
+  dataInitialState,
   notificationReducer,
   notificationInitialState,
 } from './reducers';
 
 const initialState = {
-  registration: registrationInitialState,
+  data: dataInitialState,
   notification: notificationInitialState,
 };
 
@@ -30,7 +30,7 @@ const reduceReducers = (...reducers) => {
 
 export const Store = ({ children }) => {
   const rootReducer = combineReducers({
-    registration: reduceReducers(registrationReducer),
+    data: reduceReducers(dataReducer),
     notification: reduceReducers(notificationReducer),
   });
   const [state, dispatch] = useReducer(rootReducer, initialState);

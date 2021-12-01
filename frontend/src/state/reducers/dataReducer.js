@@ -1,40 +1,40 @@
-export const registrationInitialState = {
+export const dataInitialState = {
   message: '',
   loading: false,
-  errors: {
+  error: {
     fields: [],
     message: '',
   },
 };
 
-export const registrationReducer = (
-  state = registrationInitialState,
+export const dataReducer = (
+  state = dataInitialState,
   action
 ) => {
   switch (action.type) {
-    case 'POST_REGISTRATION_REQUEST':
+    case 'POST_DATA_REQUEST':
       console.info(
-        'POST_REGISTRATION_REQUEST',
+        'POST_DATA_REQUEST',
         action
       );
       return {
         ...state,
         loading: true,
       };
-    case 'POST_REGISTRATION_SUCCESS':
+    case 'POST_DATA_SUCCESS':
       console.info(
-        'POST_REGISTRATION_SUCCESS',
+        'POST_DATA_SUCCESS',
         action
       );
       return {
         ...state,
         loading: false,
-        errors: registrationInitialState.errors,
+        errors: dataInitialState.errors,
         message: action.payload,
       };
-    case 'POST_REGISTRATION_ERROR':
+    case 'POST_DATA_ERROR':
       console.log(
-        'POST_REGISTRATION_ERROR',
+        'POST_DATA_ERROR',
         action
       );
       return {

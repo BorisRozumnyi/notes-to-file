@@ -1,15 +1,15 @@
 import React, {
-  // useContext,
+  useContext,
   useState,
 } from 'react';
-// import { Context } from '../state';
+import { Context } from '../state';
 // import { fieldError } from '../utils';
 import { InputOutline } from '../components';
-// import { postRegistration } from '../state/actions';
+import { postData } from '../state/actions';
 
 export const Data = () => {
-  // const [state, dispatch] =
-  //   useContext(Context);
+  const [state, dispatch] =
+    useContext(Context);
 
   // const errors =
   //   state.registration.errors?.errors ||
@@ -30,7 +30,7 @@ export const Data = () => {
 
   const handleRegistration = (e) => {
     e.preventDefault();
-    // postRegistration(dispatch, form);
+    postData(dispatch, form);
   };
 
   return (
