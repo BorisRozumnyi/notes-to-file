@@ -1,4 +1,33 @@
-function App() {
+import { useEffect } from 'react';
+
+export const App = () => {
+  useEffect(() => {
+    const config = {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+      },
+    };
+
+    fetch('/data/reade', config)
+      .then((res) => res.json())
+      .then(
+        (result) => {
+          if (result.message) {
+            throw result;
+          }
+          console.log(result);
+        },
+        (error) => {
+          console.log(error);
+        }
+      )
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
   return (
     <div>
       <header>
@@ -11,6 +40,4 @@ function App() {
       </header>
     </div>
   );
-}
-
-export default App;
+};
