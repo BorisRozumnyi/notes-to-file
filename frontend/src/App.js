@@ -1,4 +1,9 @@
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
+import { ThemeProvider } from 'styled-components';
+import * as theme from './theme';
+import { Routes } from './Routes';
+import { GlobalStyle } from './globalStyle';
+import { Store } from './state';
 
 export const App = () => {
   useEffect(() => {
@@ -29,15 +34,11 @@ export const App = () => {
   }, []);
 
   return (
-    <div>
-      <header>
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a href="https://reactjs.org" target="_blank" rel="noopener noreferrer">
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Store>
+      <ThemeProvider theme={theme}>
+        <GlobalStyle />
+        <Routes />
+      </ThemeProvider>
+    </Store>
   );
 };
