@@ -24,7 +24,7 @@ export const postData = (dispatch, data) => {
 
         if (result.success) {
           dispatch({
-            type: 'POST_REGISTRATION_SUCCESS',
+            type: 'POST_DATA_SUCCESS',
             payload: result,
           });
           dispatch({

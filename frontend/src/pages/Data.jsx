@@ -16,8 +16,8 @@ export const Data = () => {
   //   [];
 
   const [form, setForm] = useState({
-    username: '',
-    password: '',
+    fileName: '',
+    text: '',
   });
 
   const handleChange = (event) => {
@@ -37,21 +37,20 @@ export const Data = () => {
     <form>
       <h1>Data</h1>
       <InputOutline
-        label="username"
-        value={form.username}
+        label="fileName"
+        value={form.fileName}
         setValue={handleChange}
         // error={fieldError(
-        //   'username',
+        //   'fileName',
         //   errors
         // )}
       />
       <InputOutline
-        label="password"
-        type="password"
-        value={form.password}
+        label="text"
+        value={form.text}
         setValue={handleChange}
         // error={fieldError(
-        //   'password',
+        //   'text',
         //   errors
         // )}
       />
