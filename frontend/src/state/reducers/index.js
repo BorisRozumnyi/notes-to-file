@@ -1,4 +1,4 @@
 export * from './loginReducer';
 export * from './notificationReducer';
-export * from './dataReducer';
+export * from './noteReducer';
 export * from './userListReducer';

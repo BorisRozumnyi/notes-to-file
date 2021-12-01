@@ -1,33 +1,27 @@
 import { api } from '../../urls';
 
-export const getUsers = (dispatch) => {
+export const getNotes = (dispatch) => {
   const config = {
     method: 'GET',
     headers: {
-      'Content-Type':
-        'application/json',
-      'Access-Control-Allow-Origin':
-        '*',
-      Authorization: `Bearer ${localStorage.getItem(
-        'token'
-      )}`,
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*',
     },
   };
 
   dispatch({
-    type: 'GET_USER_LIST_REQUEST',
+    type: 'GET_NOTE_LIST_REQUEST',
   });
 
-  fetch(api.users, config)
+  fetch(api.reade, config)
     .then((res) => res.json())
     .then(
       (result) => {
         if (result.message) {
           throw result;
         }
-        console.log(result);
         dispatch({
-          type: 'GET_USER_LIST_SUCCESS',
+          type: 'GET_NOTE_LIST_SUCCESS',
           payload: result,
         });
       },
@@ -39,7 +33,7 @@ export const getUsers = (dispatch) => {
     )
     .catch((error) => {
       dispatch({
-        type: 'GET_USER_LIST_ERROR',
+        type: 'GET_NOTE_LIST_ERROR',
         payload: error,
       });
       dispatch({

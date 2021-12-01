@@ -1,5 +1,5 @@
 export const dataInitialState = {
-  data: {},
+  notes: [],
   loading: false,
   error: {
     fields: [],
@@ -10,22 +10,22 @@ export const dataInitialState = {
 export const dataReducer = (state = dataInitialState, action) => {
   const { type, payload } = action;
   switch (type) {
-    case 'POST_DATA_REQUEST':
-      console.info('POST_DATA_REQUEST', action);
+    case 'GET_NOTE_LIST_REQUEST':
+      console.info('GET_NOTE_LIST_REQUEST', action);
       return {
         ...state,
         loading: true,
       };
-    case 'POST_DATA_SUCCESS':
-      console.info('POST_DATA_SUCCESS', action);
+    case 'GET_NOTE_LIST_SUCCESS':
+      console.info('GET_NOTE_LIST_SUCCESS', action);
       return {
         ...state,
         loading: false,
         error: dataInitialState.error,
-        data: payload,
+        notes: payload,
       };
-    case 'POST_DATA_ERROR':
-      console.log('POST_DATA_ERROR', action);
+    case 'GET_NOTE_LIST_ERROR':
+      console.log('GET_NOTE_LIST_ERROR', action);
       return {
         ...state,
         error: payload.error,
