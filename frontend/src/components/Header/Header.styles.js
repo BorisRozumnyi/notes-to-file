@@ -8,21 +8,14 @@ export const StyledHeader = styled.section`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: linear-gradient(
-    #fbfbfb -20%,
-    #313a39 15%,
-    black,
-    #313a39 95%,
-    #fbfbfb 120%
-  );
+  background: linear-gradient(#fbfbfb -20%, #313a39 15%, black, #313a39 95%, #fbfbfb 120%);
   padding: 0 1rem;
 `;
 
 export const StyledLink = styled(Link)`
   padding: 1.375rem;
   display: block;
-  color: ${({ theme }) =>
-    theme.color.white};
+  color: ${({ theme }) => theme.color.white};
   text-decoration: none;
   text-transform: capitalize;
   &:after {
@@ -40,10 +33,7 @@ export const List = styled.ul`
   margin: 0;
   padding: 0;
   display: flex;
-  flex-direction: column;
-  @media only screen and (min-width: 768px) {
-    flex-direction: row;
-  }
+  flex-direction: row;
 `;
 
 export const NavItem = styled.li`
