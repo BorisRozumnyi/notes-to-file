@@ -1,8 +1,6 @@
 export const noteInitialState = {
-  note: {
-    name: '',
-    text: ''
-  },
+  name: '',
+  text: '',
   loading: false,
   error: {
     message: '',
@@ -24,7 +22,8 @@ export const noteReducer = (state = noteInitialState, action) => {
         ...state,
         loading: false,
         error: noteInitialState.error,
-        notes: payload,
+        name: payload.name,
+        text: payload.text,
       };
     case 'GET_NOTE_ERROR':
       console.log('GET_NOTE_ERROR', action);

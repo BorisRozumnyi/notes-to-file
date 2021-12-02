@@ -61,7 +61,13 @@ class dataController {
     try {
       const name = req.path.split(':')[1];
       readFileAsync(path.resolve(recordingDirectory, name))
-        .then((result) => res.json(result))
+        .then((text) => {
+          const note = {
+            name,
+            text,
+          };
+          res.json(note);
+        })
         .catch((err) => console.log(err));
     } catch (e) {
       console.log(e);
