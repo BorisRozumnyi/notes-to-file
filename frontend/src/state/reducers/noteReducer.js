@@ -1,31 +1,33 @@
-export const dataInitialState = {
-  notes: [],
+export const noteInitialState = {
+  note: {
+    name: '',
+    text: ''
+  },
   loading: false,
   error: {
-    fields: [],
     message: '',
   },
 };
 
-export const dataReducer = (state = dataInitialState, action) => {
+export const noteReducer = (state = noteInitialState, action) => {
   const { type, payload } = action;
   switch (type) {
-    case 'GET_NOTE_LIST_REQUEST':
-      console.info('GET_NOTE_LIST_REQUEST', action);
+    case 'GET_NOTE_REQUEST':
+      console.info('GET_NOTE_REQUEST', action);
       return {
         ...state,
         loading: true,
       };
-    case 'GET_NOTE_LIST_SUCCESS':
-      console.info('GET_NOTE_LIST_SUCCESS', action);
+    case 'GET_NOTE_SUCCESS':
+      console.info('GET_NOTE_SUCCESS', action);
       return {
         ...state,
         loading: false,
-        error: dataInitialState.error,
+        error: noteInitialState.error,
         notes: payload,
       };
-    case 'GET_NOTE_LIST_ERROR':
-      console.log('GET_NOTE_LIST_ERROR', action);
+    case 'GET_NOTE_ERROR':
+      console.log('GET_NOTE_ERROR', action);
       return {
         ...state,
         error: payload.error,

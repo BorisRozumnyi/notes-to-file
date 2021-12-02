@@ -1,13 +1,16 @@
 import React, { createContext, useReducer } from 'react';
 import {
-  dataReducer,
-  dataInitialState,
+  notesReducer,
+  notesInitialState,
+  noteReducer,
+  noteInitialState,
   notificationReducer,
   notificationInitialState,
 } from './reducers';
 
 const initialState = {
-  data: dataInitialState,
+  notes: notesInitialState,
+  note: noteInitialState,
   notification: notificationInitialState,
 };
 
@@ -30,7 +33,8 @@ const reduceReducers = (...reducers) => {
 
 export const Store = ({ children }) => {
   const rootReducer = combineReducers({
-    data: reduceReducers(dataReducer),
+    notes: reduceReducers(notesReducer),
+    note: reduceReducers(noteReducer),
     notification: reduceReducers(notificationReducer),
   });
   const [state, dispatch] = useReducer(rootReducer, initialState);

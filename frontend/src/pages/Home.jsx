@@ -1,6 +1,6 @@
 import { useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { frontend } from '../urls';
+import { frontend, NAME_FOR_REPLACEMENT } from '../urls';
 import { getNotes } from '../state/actions';
 import { Context } from '../state';
 
@@ -14,13 +14,13 @@ export const Home = () => {
   return (
     <div>
       <h1>Home</h1>
-      <h2>
-        Hello guest! Would you like to <Link to={frontend.data}>data?</Link>
-      </h2>
-      {state.data.notes.length > 0 && (
+      <h2>Note List</h2>
+      {state.notes.list.length > 0 && (
         <ul>
-          {state.data.notes.map((note) => (
-            <li key={note}>{note}</li>
+          {state.notes.list.map((note) => (
+            <li key={note}>
+              <Link to={frontend.note.replace(NAME_FOR_REPLACEMENT, note)}>{note}</Link>
+            </li>
           ))}
         </ul>
       )}
