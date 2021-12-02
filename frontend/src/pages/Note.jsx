@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 import { getNote } from '../state/actions/getNote';
 import { Context } from '../state';
-import { TextOutline } from '../components/Input';
+import { InputOutline } from '../components/Input';
 
 export const Note = () => {
   const [state, dispatch] = useContext(Context);
@@ -33,7 +33,7 @@ export const Note = () => {
   return (
     <>
       <h1>{name}</h1>
-      <TextOutline label="text" value={textLocal} setValue={handleChange} />
+      <InputOutline isTextarea label="text" value={textLocal} setValue={handleChange} />
     </>
   );
 };
