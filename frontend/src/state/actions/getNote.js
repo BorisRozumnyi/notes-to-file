@@ -13,7 +13,7 @@ export const getNote = (dispatch, noteName) => {
     type: 'GET_NOTE_REQUEST',
   });
 
-  fetch(`${api.reade}/:${noteName}`, config)
+  fetch(`${api.notes}/:${noteName}`, config)
     .then((res) => res.json())
     .then(
       (result) => {
@@ -28,7 +28,10 @@ export const getNote = (dispatch, noteName) => {
       // Примечание: важно обрабатывать ошибки именно здесь, а не в блоке catch(),
       // чтобы не перехватывать исключения из ошибок в самих компонентах.
       (error) => {
-        console.log(error);
+        dispatch({
+          type: 'GET_NOTE_ERROR',
+          payload: error,
+        });
       }
     )
     .catch((error) => {

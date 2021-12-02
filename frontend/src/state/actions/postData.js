@@ -11,10 +11,11 @@ export const postData = (dispatch, data) => {
   };
 
   dispatch({
-    type: 'POST_DATA_REQUEST',
+    type: 'POST_NOTE_REQUEST',
+    payload: data,
   });
 
-  fetch(api.write, config)
+  fetch(api.notes, config)
     .then((res) => res.json())
     .then(
       (result) => {
@@ -24,7 +25,7 @@ export const postData = (dispatch, data) => {
 
         if (result.success) {
           dispatch({
-            type: 'POST_DATA_SUCCESS',
+            type: 'POST_NOTE_SUCCESS',
             payload: result,
           });
           dispatch({
@@ -34,17 +35,14 @@ export const postData = (dispatch, data) => {
           });
         }
       },
-      // Примечание: важно обрабатывать ошибки именно здесь, а не в блоке catch(),
-      // чтобы не перехватывать исключения из ошибок в самих компонентах.
       (error) => {
-        console.log('error', error);
+        dispatch({
+          type: 'POST_NOTE_ERROR',
+          payload: error,
+        });
       }
     )
     .catch((error) => {
-      dispatch({
-        type: 'POST_DATA_ERROR',
-        payload: error,
-      });
       dispatch({
         type: 'SHOW_NOTIFICATION',
         payload: error.message,
