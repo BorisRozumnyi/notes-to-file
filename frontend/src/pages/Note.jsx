@@ -1,15 +1,39 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 import { getNote } from '../state/actions/getNote';
 import { Context } from '../state';
+import { TextOutline } from '../components/Input';
 
 export const Note = () => {
-  const [, dispatch] = useContext(Context);
-  let params = useParams();
+  const [state, dispatch] = useContext(Context);
+
+  const {
+    note: { text, name, loading },
+  } = state;
+
+  const params = useParams();
 
   useEffect(() => {
     getNote(dispatch, params.name);
   }, [params, dispatch]);
 
-  return <h1>{params.name}</h1>;
+  useEffect(() => {
+    console.log(text, loading);
+    if (text && !loading) setLoacalText(text);
+  }, [text, name, loading]);
+
+  const [textLocal, setLoacalText] = useState(text);
+
+  const handleChange = (event) => {
+    setLoacalText(event.target.value);
+  };
+
+  if (loading) return '...loading';
+
+  return (
+    <>
+      <h1>{name}</h1>
+      <TextOutline label="text" value={textLocal} setValue={handleChange} />
+    </>
+  );
 };
