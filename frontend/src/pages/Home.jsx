@@ -19,7 +19,7 @@ export const Home = () => {
         <ul>
           {state.notes.list.map((note) => (
             <li key={note}>
-              <Link to={frontend.note.replace(NAME_FOR_REPLACEMENT, note)}>{note}</Link>
+              <Link to={frontend.note.replace(NAME_FOR_REPLACEMENT, `:${note}`)}>{note}</Link>
             </li>
           ))}
         </ul>

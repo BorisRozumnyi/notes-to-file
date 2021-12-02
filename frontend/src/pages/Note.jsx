@@ -14,7 +14,7 @@ export const Note = () => {
   const params = useParams();
 
   useEffect(() => {
-    getNote(dispatch, params.name);
+    getNote(dispatch, params.name.slice(1));
   }, [params, dispatch]);
 
   useEffect(() => {
@@ -28,7 +28,7 @@ export const Note = () => {
   };
 
   const handleSave = () => {
-    putNote(dispatch, { name, text: textLocal });
+    putNote(dispatch, { fileName: name, text: textLocal });
   };
 
   if (loading) return '...loading';
