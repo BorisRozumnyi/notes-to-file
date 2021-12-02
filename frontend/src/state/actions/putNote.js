@@ -10,9 +10,9 @@ export const putNote = (dispatch, data) => {
     body: JSON.stringify(data),
   };
 
-  dispatch({ type: 'PUT_NOTE_REQUEST' });
+  dispatch({ type: 'PUT_NOTE_REQUEST', payload: data });
 
-  fetch(api.write, config)
+  fetch(`${api.write}/:${data.fileName}`, config)
     .then((res) => res.json())
     .then(
       (result) => {
