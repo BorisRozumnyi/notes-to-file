@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router';
-import { getNote } from '../state/actions/getNote';
 import { Context } from '../state';
 import { InputOutline } from '../components/Input';
+import { putNote, getNote } from '../state/actions';
 
 export const Note = () => {
   const [state, dispatch] = useContext(Context);
@@ -18,7 +18,6 @@ export const Note = () => {
   }, [params, dispatch]);
 
   useEffect(() => {
-    console.log(text, loading);
     if (text && !loading) setLoacalText(text);
   }, [text, name, loading]);
 
@@ -28,12 +27,17 @@ export const Note = () => {
     setLoacalText(event.target.value);
   };
 
+  const handleSave = () => {
+    putNote(dispatch, { name, text: textLocal });
+  };
+
   if (loading) return '...loading';
 
   return (
     <>
       <h1>{name}</h1>
       <InputOutline isTextarea label="text" value={textLocal} setValue={handleChange} />
+      <button onClick={handleSave}>save</button>
     </>
   );
 };

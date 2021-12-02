@@ -33,6 +33,29 @@ export const noteReducer = (state = noteInitialState, action) => {
         loading: false,
       };
 
+    case 'PUT_NOTE_REQUEST':
+      console.info('PUT_NOTE_REQUEST', action);
+      return {
+        ...state,
+        loading: true,
+      };
+    case 'PUT_NOTE_SUCCESS':
+      console.info('PUT_NOTE_SUCCESS', action);
+      return {
+        ...state,
+        loading: false,
+        error: noteInitialState.error,
+        name: payload.name,
+        text: payload.text,
+      };
+    case 'PUT_NOTE_ERROR':
+      console.log('PUT_NOTE_ERROR', action);
+      return {
+        ...state,
+        error: payload.error,
+        loading: false,
+      };
+
     default:
       return state;
   }
