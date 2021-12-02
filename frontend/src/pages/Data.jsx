@@ -8,7 +8,7 @@ import { InputOutline } from '../components';
 import { postData } from '../state/actions';
 
 export const Data = () => {
-  const [state, dispatch] =
+  const [, dispatch] =
     useContext(Context);
 
   // const errors =
