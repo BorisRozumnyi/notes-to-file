@@ -13,7 +13,7 @@ export const getNote = (dispatch, noteName) => {
     type: 'GET_NOTE_REQUEST',
   });
 
-  fetch(`${api.reade}:${noteName}`, config)
+  fetch(`${api.reade}/:${noteName}`, config)
     .then((res) => res.json())
     .then(
       (result) => {

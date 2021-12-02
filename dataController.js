@@ -49,7 +49,20 @@ class dataController {
 
   async getData(req, res) {
     try {
-      showList(path.resolve(recordingDirectory)).then((result) => res.json(result));
+      showList(path.resolve(recordingDirectory))
+        .then((result) => res.json(result))
+        .catch((err) => console.log(err));
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  async getDataByName(req, res) {
+    try {
+      const name = req.path.split(':')[1];
+      readFileAsync(path.resolve(recordingDirectory, name))
+        .then((result) => res.json(result))
+        .catch((err) => console.log(err));
     } catch (e) {
       console.log(e);
     }
